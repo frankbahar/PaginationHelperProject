@@ -22,6 +22,58 @@ public class TestJUnit {
 	}
 
 	@Test
+	public void testPageCount1() {
+		ArrayList<Character> arr = new ArrayList<>();
+		arr.add('a');
+		arr.add('b');
+		arr.add('c');
+		arr.add('d');
+		arr.add('e');
+		arr.add('f');
+		PaginationHelper<Character> helper = new PaginationHelper(arr, 7);
+		Assert.assertEquals(1, helper.pageCount()); // should == 1
+	}
+	
+	@Test
+	public void testPageCountZeroNullCheckZero() {
+		PaginationHelper<Character> helper = new PaginationHelper(null, 0);
+		Assert.assertEquals(-1, helper.pageCount()); // should == -1
+	}
+	
+	
+	@Test
+	public void testPageCountZeroNullCheck() {
+		PaginationHelper<Character> helper = new PaginationHelper(null, 4);
+		Assert.assertEquals(0, helper.pageCount()); // should == 0
+	}
+	
+	@Test
+	public void testPageCountZero() {
+		ArrayList<Character> arr = new ArrayList<>();
+		arr.add('a');
+		arr.add('b');
+		arr.add('c');
+		arr.add('d');
+		arr.add('e');
+		arr.add('f');
+		PaginationHelper<Character> helper = new PaginationHelper(arr, 0);
+		Assert.assertEquals(-1, helper.pageCount()); // should == -1 
+	}
+	
+	@Test
+	public void testPageCountNegative() {
+		ArrayList<Character> arr = new ArrayList<>();
+		arr.add('a');
+		arr.add('b');
+		arr.add('c');
+		arr.add('d');
+		arr.add('e');
+		arr.add('f');
+		PaginationHelper<Character> helper = new PaginationHelper(arr, -1);
+		Assert.assertEquals(-1, helper.pageCount()); // should == -1 
+	}
+	
+	@Test
 	public void testItemCount() {
 		ArrayList<Character> arr = new ArrayList<>();
 		arr.add('a');
@@ -33,6 +85,20 @@ public class TestJUnit {
 		PaginationHelper<Character> helper = new PaginationHelper(arr, 4);
 
 		Assert.assertEquals(6, helper.itemCount()); // should == 6
+	}
+
+	@Test
+	public void testItemCountNullcheck() {
+		PaginationHelper<Character> helper = new PaginationHelper(null, 4);
+		Assert.assertEquals(0, helper.itemCount()); // should == 0
+	}
+
+
+	@Test
+	public void testItemCountEmpty() {
+		ArrayList<Character> arr = new ArrayList<>();
+		PaginationHelper<Character> helper = new PaginationHelper(arr, 4);
+		Assert.assertEquals(0, helper.itemCount()); // should == 0
 	}
 
 	@Test
@@ -48,6 +114,44 @@ public class TestJUnit {
 		Assert.assertEquals(4, helper.pageItemCount(0)); // should == 4
 	}
 
+	@Test
+	public void testPageItemCount00() {
+		ArrayList<Character> arr = new ArrayList<>();
+		arr.add('a');
+		arr.add('b');
+		arr.add('c');
+		arr.add('d');
+		arr.add('e');
+		arr.add('f');
+		PaginationHelper<Character> helper = new PaginationHelper(arr, 7);
+		Assert.assertEquals(6, helper.pageItemCount(0)); // should == 6
+	}
+
+	@Test
+	public void testPageItemCount01() {
+		ArrayList<Character> arr = new ArrayList<>();
+		arr.add('a');
+		arr.add('b');
+		arr.add('c');
+		arr.add('d');
+		arr.add('e');
+		arr.add('f');
+		PaginationHelper<Character> helper = new PaginationHelper(arr, 7);
+		Assert.assertEquals(-1, helper.pageItemCount(1)); // should == -1
+	}
+	
+	@Test
+	public void testPageItemCountNull() {
+		PaginationHelper<Character> helper = new PaginationHelper(null, 4);
+		Assert.assertEquals(-1, helper.pageItemCount(0)); // should == -1
+	}
+	
+	@Test
+	public void testPageItemCountEmpty() {
+		PaginationHelper<Character> helper = new PaginationHelper(null, 4);
+		Assert.assertEquals(-1, helper.pageItemCount(0)); // should == -1
+	}
+	
 	@Test
 	public void testPageItemCount1() {
 		ArrayList<Character> arr = new ArrayList<>();
@@ -131,5 +235,34 @@ public class TestJUnit {
 		PaginationHelper<Character> helper = new PaginationHelper(arr, 4);
 
 		Assert.assertEquals(-1, helper.pageIndex(-10)); // should == -1
+	}
+	
+	@Test
+	public void testPageIndex0() {
+		ArrayList<Character> arr = new ArrayList<>();
+		arr.add('a');
+		arr.add('b');
+		arr.add('c');
+		arr.add('d');
+		arr.add('e');
+		arr.add('f');
+		PaginationHelper<Character> helper = new PaginationHelper(arr, 7);
+
+		Assert.assertEquals(0, helper.pageIndex(5)); // should == 0
+	}
+	
+	@Test
+	public void testPageIndexNull() {
+		PaginationHelper<Character> helper = new PaginationHelper(null, 4);
+
+		Assert.assertEquals(-1, helper.pageIndex(3)); // should == -1
+	}
+	
+	@Test
+	public void testPageIndexEmpty() {
+		ArrayList<Character> arr = new ArrayList<>();
+		PaginationHelper<Character> helper = new PaginationHelper(arr, 4);
+
+		Assert.assertEquals(-1, helper.pageIndex(3)); // should == -1
 	}
 }

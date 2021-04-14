@@ -20,7 +20,10 @@ public class PaginationHelper<I> {
 	 * items fit within a single page
 	 */
 	public PaginationHelper(List<I> collection, int itemsPerPage) {
-		this.totalCount = collection.size();
+		if( collection != null)
+			this.totalCount = collection.size();
+		else 
+			this.totalCount = 0;
 		this.itemsPerPage = itemsPerPage;
 	}
 
@@ -35,8 +38,10 @@ public class PaginationHelper<I> {
 	 * returns the number of pages
 	 */
 	public int pageCount() {
-		int totalPages = (int) Math.ceil((float) totalCount / itemsPerPage);
-		return totalPages;
+		if (itemsPerPage > 0)
+			return (int) Math.ceil((float) totalCount / itemsPerPage);
+		else 
+		return -1;
 	}
 
 	/**
